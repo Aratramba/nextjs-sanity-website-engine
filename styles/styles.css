@@ -1,0 +1,305 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding: 10vh;
+}
+
+body {
+  @apply antialiased;
+  scroll-behavior: smooth;
+}
+
+@layer utilities {
+  .bg-inherit {
+    background-color: inherit;
+  }
+
+  /* images */
+  img {
+    image-rendering: -webkit-optimize-contrast;
+  }
+
+  /* 
+  Currently Tailwind default `break-words` doesn't add word-break
+  If this is ever added this can be removed
+  */
+
+  .break-words {
+    overflow-wrap: normal;
+    word-break: break-word;
+  }
+
+  /* Overflow */
+  .overflow-scrolling-touch {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Fix wrapper div inside portable text destroying prose */
+  .prose-sm > div > :last-child {
+    margin-bottom: 0;
+  }
+  .prose-sm > div > :first-child {
+    margin-top: 0;
+  }
+  .prose > div > :last-child {
+    margin-bottom: 0;
+  }
+  .prose > div > :first-child {
+    margin-top: 0;
+  }
+
+  .preview {
+    z-index: 999;
+    position: fixed;
+    right: 16px;
+    top: 16px;
+    padding: 6px 8px;
+    background: black;
+    color: white;
+    font-size: 14px;
+  }
+
+  .preview:hover {
+    text-decoration: underline;
+  }
+}
+
+@import "./radix.css";
+@import "./swiper.css";
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+@keyframes block-placeholder-fade {
+  0% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+@keyframes block-placeholder-move {
+  0% {
+    transform: translate3d(-30%, 0, 0);
+  }
+  50% {
+    transform: translate3d(30%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-30%, 0, 0);
+  }
+}
+
+.hyphens-auto {
+  hyphens: auto;
+}
+
+.hyphens-manual {
+  hyphens: manual;
+}
+
+.hyphens-none {
+  hyphens: none;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+/*
+script[type='application/ld+json'] {
+  white-space: pre;
+  display: block;
+  z-index: 9999;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  color: #111;
+}
+*/
+
+:root {
+  --highlight-color: #2276fc;
+}
+
+.preview-highlight-hover:not(.absolute) {
+  position: relative;
+}
+
+[data-is-preview] {
+  position: relative;
+}
+
+[data-is-preview]:after {
+  pointer-events: none;
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--highlight-color);
+  z-index: 999;
+  opacity: 0;
+}
+
+.preview-highlight-open:after,
+.preview-highlight-hover:after {
+  opacity: 1;
+}
+
+.preview-highlight-open:not(.absolute) {
+  position: relative;
+}
+
+.is-taking-screenshot .preview-tools {
+  display: none;
+}
+
+/* Fancybox */
+.fancybox__content {
+  padding: 0 !important;
+}
+
+.fancybox__container.fix-iframe-height .fancybox__content {
+  height: 90% !important;
+}
+
+/* Custom PT styles not in prose */
+
+.title .list-disc,
+.title .list-decimal,
+.title .list-check {
+  @apply list-inside;
+}
+
+.title .list-check {
+  padding-left: 1.5em;
+}
+
+/* Subset of AOS styles to keep it small https://unpkg.com/aos@2.3.1/dist/aos.css */
+/* if we ever want all styled, just add to app.tsx `import "aos/dist/aos.css";` */
+
+[data-animate] {
+  opacity: 0;
+  transform: translateZ(0);
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-property: opacity, transform;
+}
+[data-animate^="fade"].animate {
+  opacity: 1;
+  transform: translateZ(0);
+}
+
+[data-animate^="zoom"].animate {
+  opacity: 1;
+  transform: translateZ(0) scale(1);
+}
+
+/* transitions */
+[data-animate="fade-in"] {
+  opacity: 0;
+}
+
+[data-animate="fade-up"] {
+  transform: translate3d(0, 6px, 0);
+  opacity: 0;
+}
+
+[data-animate="zoom-in"] {
+  transform: scale(0.98);
+  opacity: 0;
+}
+
+[data-animate="zoom-in-right"] {
+  transform: translate3d(-16px, 16px, 0) scale(0.98);
+  opacity: 0;
+}
+
+[data-animate="zoom-in-left"] {
+  transform: translate3d(16px, 16px, 0) scale(0.98);
+  opacity: 0;
+}
+
+/* prevent animation */
+[data-no-animate] [data-animate],
+[data-no-animate="true"] [data-animate] {
+  opacity: 1;
+  transform: none;
+}
+
+/* delays */
+[data-animate-delay="50"].animate {
+  transition-delay: 50ms;
+}
+[data-animate-delay="100"].animate {
+  transition-delay: 100ms;
+}
+[data-animate-delay="150"].animate {
+  transition-delay: 150ms;
+}
+[data-animate-delay="200"].animate {
+  transition-delay: 200ms;
+}
+[data-animate-delay="250"].animate {
+  transition-delay: 250ms;
+}
+[data-animate-delay="300"].animate {
+  transition-delay: 300ms;
+}
+[data-animate-delay="350"].animate {
+  transition-delay: 350ms;
+}
+[data-animate-delay="400"].animate {
+  transition-delay: 400ms;
+}
+[data-animate-delay="450"].animate {
+  transition-delay: 450ms;
+}
+[data-animate-delay="500"].animate {
+  transition-delay: 500ms;
+}
+[data-animate-delay="550"].animate {
+  transition-delay: 550ms;
+}
+[data-animate-delay="600"].animate {
+  transition-delay: 600ms;
+}
+[data-animate-delay="650"].animate {
+  transition-delay: 650ms;
+}
+[data-animate-delay="700"].animate {
+  transition-delay: 700ms;
+}
+[data-animate-delay="750"].animate {
+  transition-delay: 750ms;
+}
+[data-animate-delay="800"].animate {
+  transition-delay: 800ms;
+}
+[data-animate-delay="850"].animate {
+  transition-delay: 850ms;
+}
+[data-animate-delay="900"].animate {
+  transition-delay: 900ms;
+}
+[data-animate-delay="950"].animate {
+  transition-delay: 950ms;
+}
+[data-animate-delay="1000"].animate {
+  transition-delay: 1000ms;
+}
+
+/* duration */
+[data-animate-duration="500"].animate {
+  transition-duration: 0.5s;
+}

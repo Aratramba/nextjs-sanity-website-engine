@@ -1,0 +1,20 @@
+import engineConfig from "../engine.config";
+import { Meta, ColorPalette, ColorItem } from "@storybook/addon-docs";
+
+<Meta title="Framework/Colors" />
+
+# Colors
+
+<ColorPalette>
+  {Object.entries(engineConfig.theme.colors)
+    .filter(([key, value]) => !["current", "transparent"].includes(key))
+    .map(([key, value]) => {
+      return (
+        <ColorItem
+          title={key}
+          subtitle={typeof value === "string" ? value : ""}
+          colors={typeof value === "string" ? { [key]: value } : value}
+        />
+      );
+    })}
+</ColorPalette>

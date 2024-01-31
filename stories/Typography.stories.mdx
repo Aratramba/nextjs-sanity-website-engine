@@ -1,0 +1,44 @@
+import engineConfig from "../engine.config";
+import { Meta, Typeset } from "@storybook/addon-docs";
+
+export const fontSize = Object.entries(engineConfig.theme.fontSize)
+  .map(([key, value]) => {
+    value = Array.isArray(value) ? value[0] : value;
+    if (typeof value === "number") {
+      return value;
+    }
+    if (value.includes("rem")) {
+      return Number(value.replace(/rem|px|em/, "") * 16);
+    }
+    if (value.includes("em")) {
+      return Number(value.replace(/rem|px|em/, "") * 16);
+    }
+    return Number(value.replace(/rem|px|em/, ""));
+  })
+  .sort((a, b) => a - b)
+  .filter((value) => Boolean(value))
+  .filter((value, index, array) => array.indexOf(value) === index);
+
+<Meta title="Framework/Typography" />
+
+# Typography
+
+<div>
+  {Object.entries(engineConfig.theme.fontFamily).map(([fontName, fontValue]) =>
+    Object.entries(engineConfig.theme.fontWeight).map(
+      ([weightName, weightValue]) => (
+        <div key={fontName + weightName}>
+          <h2>
+            {fontValue[0]} {weightName}
+          </h2>
+          <Typeset
+            fontSizes={fontSize}
+            fontWeight={weightValue}
+            sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            fontFamily={fontValue}
+          />
+        </div>
+      ),
+    ),
+  )}
+</div>
