@@ -4,7 +4,7 @@ import { SitemapItemType, getSitemapQuery } from "../../queries/sitemap.query";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export const config = {
-  maxDuration: 60,
+  maxDuration: process.env.NEXT_MAX_FUNCTION_DURATION,
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<string>) => {

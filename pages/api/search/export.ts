@@ -10,7 +10,7 @@ type ResponseData =
   | string;
 
 export const config = {
-  maxDuration: 300,
+  maxDuration: process.env.NEXT_MAX_FUNCTION_DURATION,
 };
 
 export default async function handler(

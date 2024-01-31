@@ -16,7 +16,7 @@ function warning(msg: string) {
 }
 
 export const config = {
-  maxDuration: 30,
+  maxDuration: process.env.NEXT_MAX_FUNCTION_DURATION,
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {

@@ -7,7 +7,7 @@ const nested = require("postcss-nested");
 const prettify = require("postcss-prettify");
 
 export const config = {
-  maxDuration: 60,
+  maxDuration: process.env.NEXT_MAX_FUNCTION_DURATION,
 };
 const PicoSanity = require("picosanity");
 

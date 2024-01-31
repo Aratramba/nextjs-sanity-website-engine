@@ -37,6 +37,7 @@ SANITY_WEBHOOK_SECRET="xxx" # random string
 SANITY_STUDIO_PROJECT_PATH="http://localhost:3000/" # make this / on Vercel
 SANITY_API_WRITE_TOKEN="xxx" # sanity api write token
 SANITY_API_READ_TOKEN="xxx" # sanity api read token
+process.env.NEXT_MAX_FUNCTION_DURATION=10 # set this to 60+ if not Vercel Hobby plan
 ```
 
 ## Stack
